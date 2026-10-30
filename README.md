@@ -29,9 +29,7 @@ entrega pierde el 20 %; quien no aparezca aquí no cuenta como parte del grupo.
 
 | Nombre completo | Código | Correo institucional |
 |---|---|---|
-| | | |
-| | | |
-| | | |
+|Koraima Torres Díaz |1005576535 |koraima.torres@uao.edu.co|
 
 ## Entrega
 
