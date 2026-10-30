@@ -33,7 +33,7 @@ RESULTADOS.mkdir(exist_ok=True)
 # Cambie estos cuatro datos por los de la serie del grupo y documente la
 # fuente en datos/README.md. La serie de ejemplo solo sirve para probar que
 # el guion corre.
-ARCHIVO = "datos/air_passengers.csv"
+ARCHIVO = "datos/cemento_colombia.csv"
 FECHA = "Month"
 VALOR = "#Passengers"
 PERIODO = 12
