@@ -113,7 +113,7 @@ Donde:
 * $D=1$: Una diferencia estacional de 12 meses.
 * $Q=1$: Un término de media móvil estacional para ajustar los errores ocurridos en el mismo mes del año previo.
 
-*Nota metodológica:* Un menor valor de AIC garantiza una representación óptima en términos de la pérdida de información del modelo dentro de la muestra, pero **no constituye una garantía automática de superioridad en el desempeño predictivo fuera de muestra**, razón por la cual es indispensable la validación por *backtesting*.
+*Nota metodológica:* Un menor valor de AIC garantiza una representación óptima en términos de la pérdida de información del modelo dentro de la muestra, pero no constituye una garantía automática de superioridad en el desempeño predictivo fuera de muestra, razón por la cual es indispensable la validación por *backtesting*.
 
 ### 4.2. Diagnóstico de Residuos
 Para verificar si los residuos del modelo seleccionado se comportan como ruido blanco (descorrelacionados), se aplicó la prueba de hipótesis de Ljung-Box sobre los residuos del modelo ajustado.
@@ -123,14 +123,17 @@ $$\text{H}_1: \text{Los residuos exhiben autocorrelación serial}$$
 
 | Rezago ($k$) | Estadístico Ljung-Box ($Q$) | Valor $p$ | Conclusión ($\alpha = 0.05$) |
 | :---: | :---: | :---: | :---: |
+| 3 | 8.7336 | 0.0331 | Se rechaza $\text{H}_0$ (Presencia de autocorrelación) |
 | 12 | 16.0085 | 0.1908 | No se rechaza $\text{H}_0$ (Ausencia de autocorrelación) |
 | 24 | 31.9515 | 0.1282 | No se rechaza $\text{H}_0$ (Ausencia de autocorrelación) |
 
 ![Diagnóstico de residuos](../figuras/residuos.png)
 
-Al ser los valores $p > 0.05$ en los rezagos 12 y 24, no se rechaza la hipótesis nula, concluyendo que no existe autocorrelación serial remanente estadísticamente significativa en los residuos. 
+La evaluación formal de los residuos mediante la prueba de Ljung-Box arroja un estadístico de $8.7336$ con un valor $p = 0.0331$ en el rezago 3. Al ser este valor inferior al nivel de significancia ($\alpha = 0.05$), se rechaza la hipótesis nula de ruido blanco en dicho corte, evidenciando que aún persiste una autocorrelación serial remanente estadísticamente significativa en ese rezago de corto plazo. No obstante, al evaluar los rezagos estacionales 12 y 24, los valores $p$ ascienden a $0.1908$ (estadístico de $16.0085$) y $0.1282$ (estadístico de $31.9515$) respectivamente; al superar el umbral de $0.05$, no se rechaza la hipótesis nula a nivel global, confirmando que la dinámica estacional anual ha sido capturada en su totalidad.
 
-Sin embargo, el examen visual de la Figura 4 revela que en abril de 2020 se presenta un residuo negativo de gran magnitud que supera los $-600$ en la escala miles de toneladas. Esto pone de manifiesto que, si bien la estructura autocorrelacional del modelo ha capturado adecuadamente la dependencia temporal, **los residuos presentan heterocedasticidad (varianza no constante) y no normalidad estricta**, condicionada por el choque puntual de la pandemia.
+Pese a la significancia detectada en el rezago 3, el análisis visual de la ACF muestra que dicho bastón sobrepasa de forma apenas marginal la franja azul del intervalo de confianza del 95%. Por consiguiente, y en estricto apego al principio de parsimonia, el cual restringe la búsqueda a órdenes bajos dentro del conjunto $[0, 1, 2]$, se decidió mantener el mismo modelo candidato SARIMA $(1, 0, 1) \times (0, 1, 1)_{12}$ con los órdenes propuestos. Forzar la inclusión de parámetros de orden superior ($p=3$ o $q=3$) solo para absorber este rezago puntual incrementaría la complejidad del modelo y el riesgo de sobreajuste sin aportar una mejora sustancial en el pronóstico.
+
+Finalmente, el examen visual de la Figura 4 revela que en abril de 2020 se presenta un residuo negativo de gran magnitud que supera los $-600$ en la escala de miles de toneladas. Esto pone de manifiesto que, si bien el modelo ha capturado adecuadamente la estructura temporal principal, los residuos presentan heterocedasticidad (varianza no constante) y no normalidad estricta, condicionadas directamente por el choque puntual de la pandemia.
 
 ### 4.3. Incorporación de Variables Exógenas (SARIMAX)
 Con el fin de mejorar la capacidad explicativa del modelo, se construyó un modelo **SARIMAX $(1, 0, 1) \times (0, 1, 1)_{12}$** incorporando como variable exógena el **número de días festivos en Colombia por mes**, extraídos mediante la librería `holidays`.
