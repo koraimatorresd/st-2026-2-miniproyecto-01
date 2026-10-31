@@ -113,7 +113,7 @@ Donde:
 * $D=1$: Una diferencia estacional de 12 meses.
 * $Q=1$: Un término de media móvil estacional para ajustar los errores ocurridos en el mismo mes del año previo.
 
-*Nota metodológica:* Un menor valor de AIC garantiza una representación óptima en términos de la pérdida de información del modelo dentro de la muestra, pero **no constituye una garantía automática de superioridad en el desempeño predictivo fuera de muestra**, razón por la cual es indispensable la validación por *backtesting*.
+*Nota metodológica:* Un menor valor de AIC garantiza una representación óptima en términos de la pérdida de información del modelo dentro de la muestra, pero no constituye una garantía automática de superioridad en el desempeño predictivo fuera de muestra, razón por la cual es indispensable la validación por *backtesting*.
 
 ### 4.2. Diagnóstico de Residuos
 Para verificar si los residuos del modelo seleccionado se comportan como ruido blanco (descorrelacionados), se aplicó la prueba de hipótesis de Ljung-Box sobre los residuos del modelo ajustado.
@@ -123,6 +123,7 @@ $$\text{H}_1: \text{Los residuos exhiben autocorrelación serial}$$
 
 | Rezago ($k$) | Estadístico Ljung-Box ($Q$) | Valor $p$ | Conclusión ($\alpha = 0.05$) |
 | :---: | :---: | :---: | :---: |
+| 3 | 8.7336 | 0.0331 | Se rechaza $\text{H}_0$ (Presencia de autocorrelación) |
 | 12 | 16.0085 | 0.1908 | No se rechaza $\text{H}_0$ (Ausencia de autocorrelación) |
 | 24 | 31.9515 | 0.1282 | No se rechaza $\text{H}_0$ (Ausencia de autocorrelación) |
 
