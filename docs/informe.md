@@ -24,7 +24,7 @@ El presente estudio analiza la evolución mensual de los despachos nacionales de
 +-------------------+-----------------------------------------------------------+
 ```
 
-![Serie temporal original](figuras/serie.png)
+![Serie temporal original](../figuras/serie.png)
 
 ### 1.2. Tratamiento de Datos Atípicos y Decisiones Metodológicas
 Al examinar la serie histórica en la Figura 1, se aprecia una trayectoria predominantemente ascendente entre 2009 y 2015, seguida de una fase de estabilización estructural alrededor del millón de toneladas mensuales. Sin embargo, el rasgo gráfico más sobresaliente es la severa caída registrada en **abril de 2020**, mes en el cual los despachos descendieron a **242,414.00 toneladas**, el valor mínimo absoluto del histórico.
@@ -43,7 +43,7 @@ Se decidió **conservar la serie histórica completa sin realizar recortes ni im
 
 Para aislar las dinámicas subyacentes de la serie, se implementó una descomposición estacional y de tendencia mediante LOESS (**STL**, *Seasonal and Trend decomposition using Loess*) configurada con un periodo estacional $m = 12$ y estimación robusta (`robust=True`).
 
-![Descomposición STL](figuras/stl.png)
+![Descomposición STL](../figuras/stl.png)
 
 ### 2.1. Propósito y Significado de la Configuración STL Robusta
 La descomposición STL convencional basada en mínimos cuadrados es altamente sensible a choques aislados de gran magnitud. Al activar la opción `robust=True`, el algoritmo aplica un esquema iterativo de ponderación doble (*reweighted Least Squares*), reduciendo la influencia de observaciones anómalas en la estimación de las componentes de tendencia y estacionalidad. Esto previene que el colapso puntual de abril de 2020 distorsione el patrón estacional recurrente de la serie.
@@ -79,7 +79,7 @@ El guion automatizado aplica un principio de **parsimonia**: entre las versiones
 ### 3.2. Análisis de Correlación: ACF y PACF
 Una vez transformada la serie mediante $d=0$ y $D=1$, se calcularon la Función de Autocorrelación ($ACF$) y la Función de Autocorrelación Parcial ($PACF$) sobre 36 rezagos para identificar los órdenes de los procesos autorregresivos ($p, P$) y de medias móviles ($q, Q$).
 
-![ACF y PACF](figuras/acf_pacf.png)
+![ACF y PACF](../figuras/acf_pacf.png)
 
 * **Rezagos significativos en ACF (identificación de $q, Q$):** Rezagos 1, 2 y 12 sobresalen fuera de la banda de confianza teórica del 95%. La significancia en el rezago 12 corrobora la necesidad de una estructura de medias móviles estacional ($Q \ge 1$).
 * **Rezagos significativos en PACF (identificación de $p, P$):** Rezagos 1, 10, 12, 13, 22, 24 y 25 cruzan los límites de confianza. Los picos en 1 y en múltiplos estacionales (12, 24) sugieren la presencia de términos autorregresivos tanto no estacionales ($p \ge 1$) como estacionales ($P \ge 1$).
@@ -126,7 +126,7 @@ $$\text{H}_1: \text{Los residuos exhiben autocorrelación serial}$$
 | 12 | 16.0085 | 0.1908 | No se rechaza $\text{H}_0$ (Ausencia de autocorrelación) |
 | 24 | 31.9515 | 0.1282 | No se rechaza $\text{H}_0$ (Ausencia de autocorrelación) |
 
-![Diagnóstico de residuos](figuras/residuos.png)
+![Diagnóstico de residuos](../figuras/residuos.png)
 
 Al ser los valores $p > 0.05$ en los rezagos 12 y 24, no se rechaza la hipótesis nula, concluyendo que no existe autocorrelación serial remanente estadísticamente significativa en los residuos. 
 
