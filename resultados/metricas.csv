@@ -1,5 +1,5 @@
 modelo,decision,RMSE,MAE,MAPE
-"SARIMAX(1, 0, 1)(0, 1, 1, 12) + exógenas","Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020), aislando los atípicos mediante STL robusta.",85051.39,72344.35,6.54
-estacional ingenuo,"Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020), aislando los atípicos mediante STL robusta.",89786.8,78144.62,7.07
-"SARIMA(1, 0, 1)(0, 1, 1, 12)","Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020), aislando los atípicos mediante STL robusta.",90620.14,76555.65,6.85
-ingenuo,"Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020), aislando los atípicos mediante STL robusta.",111709.71,95200.12,8.72
+"SARIMAX(1, 0, 1)(0, 1, 1, 12) + exógenas",Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020).,85051.39,72344.35,6.54
+estacional ingenuo,Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020).,89786.8,78144.62,7.07
+"SARIMA(1, 0, 1)(0, 1, 1, 12)",Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020).,90620.14,76555.65,6.85
+ingenuo,Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020).,111709.71,95200.12,8.72

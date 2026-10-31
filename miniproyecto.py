@@ -51,7 +51,7 @@ PERIODO = 12
 ESCALA = 1000 # los modelos se ajustan en miles de toneladas
 
 # Se documenta la decisión metodológica sobre el tratamiento de la serie.
-DECISION = "Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020), aislando los atípicos mediante STL robusta."
+DECISION = "Sin valores nulos. Se decide NO recortar la serie y mantener el histórico completo (incluyendo 2020)."
 
 
 def preparar(serie):
