@@ -221,7 +221,7 @@ def elegir_sarima(serie, d, D):
     residuos = ajuste.resid.iloc[d + PERIODO * D:]
 
     # Se aplica Ljung-Box para evaluar si los residuos conservan autocorrelación.
-    lb = acorr_ljungbox(residuos, lags=[12, 24])
+    lb = acorr_ljungbox(residuos, lags=[3, 12, 24])
     print("\nPrueba de Ljung-Box sobre los residuos (H0: Ruido blanco):")
     print(lb.round(4).to_string())
 
